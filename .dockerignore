@@ -3,3 +3,5 @@ renv/staging
 renv/sandbox
 renv/activate.R
 .Rprofile
+
+**/.ipynb_checkpoints
