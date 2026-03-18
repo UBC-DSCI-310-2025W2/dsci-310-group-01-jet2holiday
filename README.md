@@ -11,7 +11,20 @@
 ## Project Introduction
 This repository is part of Milestone 1 of the DSCI 310 course project to perform a predictive analysis on a public dataset. We chose to conduct our analysis on the public Vancouver Airbnb data available from the link: "https://insideairbnb.com/get-the-data/" under "Vancouver, British Columbia, Canada 17 November, 2025". Using this data, we built a regression model to predict Airbnb listing nightly prices using the features available in the dataset such as room type, location, capacity, review scores, and host attributes.
 
-The goal of this analysis is to find out which features have the strongest influences on the pricing of the Airbnb listings.
+The goal of this analysis is to see how well we can predict the nightly price of Airbnb listings in Vancouver, British Columbia using key hosting and property features.
+
+## Analysis Findings
+
+Our multiple linear regression model achieved a test RMSE of 0.46 and a test R-squared of 0.497, meaning the model explains approximately 49.7% of the variance in log-transformed nightly prices on unseen data. 
+
+We identified the strongest predictors to nightly prices that was used in the predictive model:
+- `accommodates` 
+- `bedrooms` 
+- `bathrooms` 
+- `room_type`
+-  `property_type` 
+
+Tourists (airbnb customers) can get a reasonable estimate of whether a listing is fairly priced simply by looking at these features, without needing to dig into host history or review scores.
 
 ## How to Run the Analysis
 
