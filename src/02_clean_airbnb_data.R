@@ -3,6 +3,7 @@
 #
 # This script cleans the Airbnb dataset by selecting relevant variables, handling missing values, 
 # and refactoring `host_is_superhost`, `property_type` and `neighbourhood` columns. 
+# 
 # It outputs cleaned data. 
 #
 # Usage:
@@ -21,7 +22,7 @@ doc <- "Usage:
 
 opt <- docopt(doc)
 
-# Data Tidying
+# Define a data cleaning function
 clean_airbnb_data <- function(raw_airbnb) {
 
     # Set a random seed to ensure reproducibility
@@ -93,7 +94,7 @@ main <- function() {
     # Read the data
     raw_airbnb <- read_csv(input)
 
-    # Clean the data
+    # Clean the data using the function defined above
     airbnb <- clean_airbnb_data(raw_airbnb)
 
     # Create output directory

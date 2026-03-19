@@ -5,7 +5,7 @@
 # It generates visualizations and summary statistics using the training data,
 # and applies log transformation to both training and testing datasets.
 #
-# This script outputs 3 figures and 1 table:
+# It outputs 3 figures and 1 table:
 # - price_histogram.png: histogram of listing prices
 # - log_price_histogram.png: histogram of log-transformed prices
 # - boxplots.png: a combined plot of four boxplots
@@ -15,6 +15,7 @@
 # 04_eda_airbnb.R --train=<train> --test=<test> --out_dir=<out_dir>
 
 
+library(tidyverse)
 library(dplyr)
 library(readr)
 library(ggplot2)

@@ -1,7 +1,10 @@
 # author: Jialin Zhang
 # date: 2026-03-18
 #
-# This script downloads Airbnb data from the InsideAirbnb website URL, and outputs raw data. 
+# This script downloads Airbnb data from the InsideAirbnb website URL: 
+# "https://data.insideairbnb.com/canada/bc/vancouver/2025-11-17/data/listings.csv.gz"
+#
+# It outputs a raw dataset. 
 #
 # Usage:
 # 01_download_airbnb_data.R --url=<url> --out=<out>

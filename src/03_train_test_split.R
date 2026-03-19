@@ -2,6 +2,7 @@
 # date: 2026-03-18
 #
 # This script splits the cleaned Airbnb dataset into training and testing sets.
+# 
 # It outputs the training set and testing set. 
 #
 # Usage:
