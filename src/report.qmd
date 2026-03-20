@@ -46,7 +46,7 @@ url = "https://data.insideairbnb.com/canada/bc/vancouver/2025-11-17/data/listing
 raw_airbnb <- read_csv(url)
 
 # Uncomment if desired to load df locally
-# raw_airbnb <- read.csv("data/raw/listings.csv")
+# raw_airbnb <- read.csv("../data/raw/listings.csv")
 ```
 
 ```{r}
@@ -80,7 +80,7 @@ airbnb <- raw_airbnb %>%
 #| label: recode-superhost
 #| include: false
 
-# Refactor 'host_is_superhost' to 'Yes', 'No', "Unknown'
+# Refactor 'host_is_superhost' to 'Yes', 'No', 'Unknown'
 airbnb <- airbnb %>%
   mutate(
     host_is_superhost = case_when(
@@ -166,7 +166,7 @@ A total of `r nrow(airbnb_train)` Airbnb listings throughout Vancouver, Canada w
 
 Airbnb is a company that acts as a middleman between homeowners and tourists through providing the former a platform to use their property as vacation rentals.
 
-The dataset used for this research project was detailed Airbnb listings data in Vancouver. This dataset held many features that detailed each listing in the city concerning the host (e.g., response rate, superhost status), the property (e.g., room type, neighbourhood, number of bedrooms), and the pricings. There are in total `r ncol(raw_airbnb)` features throughout this dataset and `r nrow(raw_airbnb)` rows.
+The dataset used for this research project was detailed Airbnb listings data in Vancouver. This dataset held many features that detailed each listing in the city concerning the host (e.g., response rate, superhost status), the property (e.g., room type, neighbourhood, number of bedrooms), and pricing. There are in total `r ncol(raw_airbnb)` features throughout this dataset and `r nrow(raw_airbnb)` rows.
 
 Many of these features are associated with the listing prices, however only some are expected to have strong links to them. After identifying and selecting features with the most association, can they be used to predict the nightly price of any Airbnb listing in Vancouver?
 
@@ -451,13 +451,13 @@ p7
 ```
 
 
-Some interpretation of the input variables are that all numeric inputs hold a positive relationship with price. `bathrooms` has the most impactful feature with a coefficient of 0.26. The other numerical features `bedrooms` (coefficient: 0.11) and `accommodates` (coefficient: 0.05) also drive price upwards. 
+Some interpretation of the input variables are that all numeric inputs hold a positive relationship with price. `bathrooms` has the most impactful feature with a coefficient of `r round(coef(airbnb_model)["bathrooms"], 5)`. The other numerical features `bedrooms` (coefficient: `r round(coef(airbnb_model)["bedrooms"], 5)`) and `accommodates` (coefficient: `r round(coef(airbnb_model)["accommodates"], 5)`) also drive price upwards. 
 
-`room_type` and `property_type` being negative coefficients indicate that these features decrease price relative to their baseline categories (`Entire home/apt` and `Entire condo`). Listing a `Private room` (-0.35) or `Shared room` (-0.40) can drastically reduce the expected price compared to the entire apartment. Similarly in the case of the `entire condo` baseline, `Entire rental unit` (-0.06) and `Entire home` (-0.19) have smaller but still negative price differences compared to the baseline
+`room_type` and `property_type` being negative coefficients indicate that these features decrease price relative to their baseline categories (`Entire home/apt` and `Entire condo`). Listing a `Private room` (`r round(coef(airbnb_model)["room_typePrivate room"], 5)`) or `Shared room` (`r round(coef(airbnb_model)["room_typeShared room"], 5)`) can drastically reduce the expected price compared to the entire apartment. Similarly in the case of the `entire condo` baseline, `Entire rental unit` (`r round(coef(airbnb_model)["property_typeEntire rental unit"], 5)`) and `Entire home` (`r round(coef(airbnb_model)["property_typeEntire home"], 5)`) have smaller but still negative price differences compared to the baseline
 
-Based on the Adjusted R-squared value, the model yielded an adjusted r-squared of 0.491 meaning that the selected five predictors were able to successfully explain 49.1% of all variance in the log-transformed prices. The outputted F-statistic (494.8, p < 2.2e-16) indicates that this model is highly significant. Every predictor was statistically significant with only `room_typeShared room` and `property_typeEntire` rental unit sitting at the highest p-values but were still well below the standard 0.05 threshold. 
+Based on the Adjusted R-squared value, the model yielded an adjusted r-squared of `r round(summary(airbnb_model)$adj.r.squared, 3)` meaning that the selected five predictors were able to successfully explain 49.1% of all variance in the log-transformed prices. The outputted F-statistic (`r round(summary(airbnb_model)$fstatistic[1], 2)`, p < `r round(summary(airbnb_model)$fstatistic[2], 2)`) indicates that this model is highly significant. Every predictor was statistically significant with only `room_typeShared room` and `property_typeEntire rental unit` sitting at the highest p-values but were still well below the standard `r round(summary(airbnb_model)$coefficients[1], 5)` threshold. 
 
-@fig-coefficients visualizes that `bathrooms` sitting at the far right is clearly the most powerful positive driver with a very tight confidence interval. Meanwhile, the room types and private room predictors sit further left, visually confirming how lack of privacy is a negative factor on a listing's price. The extremely wide confidence interval for the predictor `room_typeShared_room` can likely be due to a smaller sample size of this category in the selected sample from the dataset. 
+@fig-coefficients visualizes that `bathrooms` sitting at the far right is clearly the most powerful positive driver with a very tight confidence interval. Meanwhile, the room types and private room predictors sit further left, visually confirming how lack of privacy is a negative factor on a listing's price. The extremely wide confidence interval for the predictor `room_typeShared room` can likely be due to a smaller sample size of this category in the selected sample from the dataset. 
 
 ### Test Set Performance
 
@@ -504,7 +504,7 @@ Overall the model demonstrates moderate predictive performance. It captures near
 
 ### Summary
 
-The multiple linear regression model achieved a test RMSE of `r round(rmse, 3)` and a test R-squared of `r round(r2_test, 3)`, meaning the model explains approximately `r round(r2_test * 100, 1)`% of the variance in log-transformed nightly prices on unseen data. Physical capacity features were the strongest predictors, with `accommodates` (r=`r round(cor(airbnb_test$accommodates, airbnb_test$log_price), 2)`), `bedrooms` (r=`r round(cor(airbnb_test$bedrooms, airbnb_test$log_price), 2)`), and `bathrooms` (r=`r round(cor(airbnb_test$bathrooms, airbnb_test$log_price), 2)`) contributing the most to the model's predictive power. Categorical features like `room_type` and `property_type` also improved predictions by capturing privacy and property differences between listings. In contrast, host-centered features such as `review_scores_rating` (r=`r round(cor(airbnb_test$review_scores_rating, airbnb_test$log_price), 2)`) and superhost status showed weak predictive value and were excluded from the final model. Overall, the model demonstrates moderate predictive performance using only five features, suggesting that while physical property characteristics are useful predictors of nightly price, other unincluded features such as amenities or location proximity likely account for the remaining variance.
+The multiple linear regression model achieved a test RMSE of `r round(rmse, 3)` and a test R-squared of `r round(r2_test, 3)`, meaning the model explains approximately `r round(r2_test * 100, 1)`% of the variance in log-transformed nightly prices on unseen data. Physical capacity features were the strongest predictors, with `accommodates` (r=`r round(cor(airbnb_test$accommodates, airbnb_test$log_price), 2)`), `bedrooms` (r=`r round(cor(airbnb_test$bedrooms, airbnb_test$log_price), 2)`), and `bathrooms` (r=`r round(cor(airbnb_test$bathrooms, airbnb_test$log_price), 2)`) contributing the most to the model's predictive power. Categorical features like `room_type` and `property_type` also improved predictions by capturing privacy and property differences between listings. In contrast, host-centered features such as `review_scores_rating` (r=`r round(cor(airbnb_test$review_scores_rating, airbnb_test$log_price, use = "complete.obs"), 2)`) and superhost status showed weak predictive value and were excluded from the final model. Overall, the model demonstrates moderate predictive performance using only five features, suggesting that while physical property characteristics are useful predictors of nightly price, other unincluded features such as amenities or location proximity likely account for the remaining variance.
 
 ### Key Takeaways
 
