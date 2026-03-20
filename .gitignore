@@ -6,3 +6,8 @@
 .Ruserdata
 renv/.ipynb_checkpoints/
 renv/
+
+# Quarto build artifacts
+*.html
+*_files/
+.quarto/
