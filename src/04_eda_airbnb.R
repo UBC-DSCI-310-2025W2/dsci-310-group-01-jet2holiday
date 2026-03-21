@@ -46,7 +46,7 @@ main <- function() {
     p1 <- ggplot(airbnb_train, aes(x = price)) + 
       geom_histogram(bins = 40) + 
       labs(title = "Histogram of Airbnb Listing Price", 
-           x = "Price (CAD $)", y = "Count", subtitle = "Plot 1")
+           x = "Price (CAD $)", y = "Count")
     
     ggsave(file.path(out_dir, "price_histogram.png"), plot = p1, width = 6, height = 5)
     
@@ -58,7 +58,7 @@ main <- function() {
     p2 <- ggplot(airbnb_train, aes(x = log_price)) + 
       geom_histogram(bins = 40) + 
       labs(title = "Histogram of Log-transformed Airbnb Listing Price", 
-           x = "Log Price (CAD)", y = "Count", subtitle = "Plot 2")
+           x = "Log Price (CAD)", y = "Count")
     
     ggsave(file.path(out_dir, "log_price_histogram.png"), plot = p2, width = 6, height = 5)
     
@@ -86,7 +86,7 @@ main <- function() {
            x = "Room Type",
            y = "Log Price (CAD)",
            fill = "Room Type",
-           subtitle = "Plot 3")
+           subtitle = "(a)")
     
     # Boxplot: Property Type vs. Log Price
     p4 <- ggplot(airbnb_train, aes(x = property_type, y = log_price, fill = property_type)) +
@@ -94,8 +94,8 @@ main <- function() {
       labs(title = "Log Price by Property Type",
            x = "Property Type",
            y = "Log Price (CAD)",
-           fill = "Property Type",
-           subtitle = "Plot 4") +
+           fill = "Property Type", 
+           subtitle = "(b)") +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
     
     # Boxplot: Neighbourhood vs. Log Price
@@ -105,12 +105,17 @@ main <- function() {
            x = "Neighbourhood",
            y = "Log Price (CAD)",
            fill = "Neighbourhood",
-           subtitle = "Plot 5") +
+           subtitle = "(c)") +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
     
     # Boxplot: Superhost Status vs. Log Price
     p6 <- ggplot(airbnb_train, aes(x = host_is_superhost, y = log_price, fill = host_is_superhost)) +
-    geom_boxplot()
+      geom_boxplot() +
+      labs(title = "Log Price by Superhost Status",
+           x = "Superhost",
+           y = "Log Price (CAD)",
+           fill = "Is a Superhost?",
+           subtitle = "(d)")
     
     combined_plot <- (p3 | p4) / (p5 | p6)
     

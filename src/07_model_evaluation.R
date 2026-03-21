@@ -48,8 +48,7 @@ main <- function() {
       geom_errorbar(aes(xmin = conf.low, xmax = conf.high), height = 0.2) +
       labs(title = "Regression Coefficient Estimates",
            x = "Coefficient Estimate",
-           y = "Variables",
-           subtitle = "Plot 7")
+           y = "Variables")
     
     ggsave(
         file.path(out_dir, "coefficient_plot.png"),
@@ -72,8 +71,7 @@ main <- function() {
         geom_point() +
         labs(title = "Predicted vs Actual Log Prices",
             x = "Predicted Log Price",
-            y = "Actual Log Price",
-            subtitle = "Plot 8")
+            y = "Actual Log Price")
     
     ggsave(
         file.path(out_dir, "residual_plot.png"),
