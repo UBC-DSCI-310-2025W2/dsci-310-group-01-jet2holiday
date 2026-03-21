@@ -72,6 +72,24 @@ docker run -p 8888:8888 airbnb-analysis
 ```
 4. Open the Jupyter link provided in the terminal.
 
+### Using Make (Automated Pipeline)
+
+This project uses a `Makefile` to fully automate the data pipeline, from downloading the raw data, to cleaning and modeling, all the way to rendering the final predictive Quarto report. 
+
+1. Clone the repository and navigate to the project directory:
+```
+sh
+git clone https://github.com/UBC-DSCI-310-2025W2/dsci-310-group-01-jet2holiday.git
+cd dsci-310-group-01-jet2holiday
+```
+
+2. Install the R environment:
+R -e "install.packages('renv')"
+R -e "renv::restore()"
+
+3. Run the analysis:
+make all 
+
 ## Project Structure
 
 - `src/airbnb_price_analysis.ipynb`: original analysis notebook
