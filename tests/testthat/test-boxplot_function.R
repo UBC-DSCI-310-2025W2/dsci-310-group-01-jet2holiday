@@ -49,6 +49,25 @@ test_that("plot_boxplot uses default xlab correctly", {
 })
 
 
+# Error case: input is not a dataframe
+test_that("plot_boxplot throws error when data is not a dataframe", {
+    expect_error(
+        plot_boxplot(123, cyl, "Test Plot"),
+        "data must be a dataframe"
+    )
+})
+
+
+# Error case: missing the 'log_price' column
+test_that("plot_boxplot throws error when log_price column is missing", {
+    df <- mtcars
+    expect_error(
+        plot_boxplot(df, cyl, "Test Plot"),
+        "data must contain a 'log_price' column"
+    )
+})
+
+
 # Edge case
 test_that("plot_boxplot works with empty dataframe", {
     df <- mtcars[0, ]
