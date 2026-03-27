@@ -8,31 +8,18 @@
 # Usage:
 # 03_train_test_split.R --input=<input> --train=<train> --test=<test>
 
-
 library(dplyr)
 library(readr)
 library(docopt)
+
+# Source the abstracted function
+source("R/split_data.R")
 
 doc <- "Usage:
   03_train_test_split.R --input=<input> --train=<train> --test=<test>
 "
 
 opt <- docopt(doc)
-
-split_data <- function(airbnb) {
-    
-    # Set seed for reproducibility
-    set.seed(310)
-
-    # Conduct an 80-20 split
-    airbnb_train <- airbnb %>% 
-    sample_frac(0.8)
-    
-    airbnb_test <- anti_join(airbnb, airbnb_train, by = "id")
-    
-    return(list(train = airbnb_train, test = airbnb_test))
-}
-
 
 main <- function() {
     
@@ -44,7 +31,7 @@ main <- function() {
     airbnb <- read_csv(input)
     
     # Split the data
-    split <- split_data(airbnb)
+    split <- split_data(airbnb, prop = 0.8)
     airbnb_train <- split$train
     airbnb_test <- split$test
     
@@ -60,6 +47,5 @@ main <- function() {
     cat("Training Set Dimensions:", dim(airbnb_train), "\n")
     cat("Testing Set Dimensions:", dim(airbnb_test), "\n")
 }
-
 
 main()
