@@ -42,7 +42,7 @@ calculate_rmse <- function(predicted, actual) {
 #' @return A single numeric value representing R-squared.
 #'
 #' @examples
-#' calculate_r_squared(c(1, 2, 3), c(1.1, 1.9, 3.2))
+#' calculate_r_squared(c(1.1, 1.9, 3.2), c(1, 2, 3))
 calculate_r_squared <- function(predicted, actual) {
   if (!is.numeric(predicted) || !is.numeric(actual)) {
     stop("Both `predicted` and `actual` must be numeric vectors.")

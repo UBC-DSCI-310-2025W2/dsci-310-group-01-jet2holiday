@@ -1,3 +1,7 @@
+library(testthat)
+
+source("../../R/model_evaluation_helpers.R")
+
 # Tests for model_evaluation_helpers.R
 
 # --- calculate_rmse tests ---
