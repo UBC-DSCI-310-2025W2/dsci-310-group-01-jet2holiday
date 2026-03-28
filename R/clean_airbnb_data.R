@@ -21,6 +21,23 @@
 #' clean_airbnb_data(raw_airbnb)
 
 clean_airbnb_data <- function(raw_airbnb) {
+  
+    # Check if the data input is a dataframe
+    if(!is.data.frame(raw_airbnb)) {
+      stop("data must be a dataframe")
+    }
+  
+    required_cols <- c("id", "host_is_superhost", "neighbourhood_cleansed", 
+                        "property_type", "room_type", "accommodates", 
+                        "bathrooms", "bedrooms", "price", 
+                        "review_scores_rating", "reviews_per_month")
+  
+    missing_cols <- setdiff(required_cols, colnames(raw_airbnb))
+    
+    # Check if the input dataframe is missing any important columns
+    if (length(missing_cols) > 0) {
+      stop("missing required columns")
+    }
     
     # Keep the target variable and most relevant columns
     # Keep 'id' as a character variable

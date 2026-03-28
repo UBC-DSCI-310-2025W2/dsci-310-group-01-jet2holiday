@@ -6,6 +6,17 @@ library(tidyr)
 library(docopt)
 source("../../R/clean_airbnb_data.R")
 
+test_that("`clean_airbnb_data` should throw an error if input is not a data frame", {
+  expect_error(clean_airbnb_data("not_a_dataframe"), "data must be a dataframe")
+  expect_error(clean_airbnb_data(123), "data must be a dataframe")
+  expect_error(clean_airbnb_data(list(a = 1)), "data must be a dataframe")
+})
+
+test_that("`clean_airbnb_data` should throw an error if input data frame is missing specific columns", {
+  expect_error(clean_airbnb_data(missing_col_obs), "missing required columns")
+  expect_error(clean_airbnb_data(mtcars), "missing required columns")
+})
+
 test_that("`clean_airbnb_data` should return a data frame", {
   clean_df <- clean_airbnb_data(one_raw_instance_obs)
   expect_s3_class(clean_df, "data.frame")

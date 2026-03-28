@@ -18,6 +18,17 @@ one_raw_instance_obs <- data.frame(id = 1,
 
 zero_na_obs <- one_raw_instance_obs
 
+missing_col_obs <- data.frame(id = 1,
+                              host_is_superhost = TRUE,
+                              property_type = "House",
+                              price = "$50",
+                              review_scores_rating = 4.5,
+                              reviews_per_month = 3,
+                              accommodates = 2,
+                              bedrooms = 1,
+                              bathrooms = 1,
+                              room_type = "Entire")
+
 price_na_obs <- data.frame(id = 1,
                               host_is_superhost = TRUE,
                               property_type = "House",
