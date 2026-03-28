@@ -23,6 +23,9 @@ library(tidyr)
 library(docopt)
 library(patchwork)
 
+# Source boxplot function
+source("R/boxplot_function.R")
+
 doc <- "Usage:
   04_eda_airbnb.R --train=<train> --test=<test> --out_dir=<out_dir>
 "
@@ -80,42 +83,44 @@ main <- function() {
     write_csv(cor_table, file.path(out_dir, "correlation_table.csv"))
     
     # Boxplot: Room Type vs. Log Price
-    p3 <- ggplot(airbnb_train, aes(x = room_type, y = log_price, fill = room_type)) +
-      geom_boxplot() +
-      labs(title = "Log Price by Room Type",
-           x = "Room Type",
-           y = "Log Price (CAD)",
-           fill = "Room Type",
-           subtitle = "(a)")
+    p3 <- plot_boxplot(
+        airbnb_train,
+        room_type,
+        "Log Price by Room Type",
+        "(a)",
+        xlab = "Room Type",
+        rotate_x = TRUE
+    )
     
     # Boxplot: Property Type vs. Log Price
-    p4 <- ggplot(airbnb_train, aes(x = property_type, y = log_price, fill = property_type)) +
-      geom_boxplot() +
-      labs(title = "Log Price by Property Type",
-           x = "Property Type",
-           y = "Log Price (CAD)",
-           fill = "Property Type", 
-           subtitle = "(b)") +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    p4 <- plot_boxplot(
+        airbnb_train,
+        property_type,
+        "Log Price by Property Type",
+        "(b)",
+        xlab = "Property Type",
+        rotate_x = TRUE
+    )
     
     # Boxplot: Neighbourhood vs. Log Price
-    p5 <- ggplot(airbnb_train, aes(x = neighbourhood, y = log_price, fill = neighbourhood)) +
-      geom_boxplot() +
-      labs(title = "Log Price by Neighbourhood",
-           x = "Neighbourhood",
-           y = "Log Price (CAD)",
-           fill = "Neighbourhood",
-           subtitle = "(c)") +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    p5 <- plot_boxplot(
+        airbnb_train,
+        neighbourhood,
+        "Log Price by Neighbourhood",
+        "(c)",
+        xlab = "Neighbourhood",
+        rotate_x = TRUE
+    )
     
     # Boxplot: Superhost Status vs. Log Price
-    p6 <- ggplot(airbnb_train, aes(x = host_is_superhost, y = log_price, fill = host_is_superhost)) +
-      geom_boxplot() +
-      labs(title = "Log Price by Superhost Status",
-           x = "Superhost",
-           y = "Log Price (CAD)",
-           fill = "Is a Superhost?",
-           subtitle = "(d)")
+    p6 <- plot_boxplot(
+        airbnb_train,
+        host_is_superhost,
+        "Log Price by Superhost Status",
+        "(d)",
+        xlab = "Superhost",
+        fill_lab = "Is a Superhost?"
+    )
     
     combined_plot <- (p3 | p4) / (p5 | p6)
     
