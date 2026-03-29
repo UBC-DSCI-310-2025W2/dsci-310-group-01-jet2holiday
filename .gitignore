@@ -11,3 +11,4 @@ renv/
 *.html
 *_files/
 .quarto/
+.ipynb_checkpoints/
