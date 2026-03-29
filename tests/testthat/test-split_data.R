@@ -5,6 +5,7 @@ library(dplyr)
 source("../../R/split_data.R")
 
 test_that("split_data returns a list with two dataframes named 'train' and 'test'", {
+  set.seed(310)
   dummy_df <- data.frame(id = 1:10, val = runif(10))
   res <- split_data(dummy_df)
   
@@ -15,6 +16,7 @@ test_that("split_data returns a list with two dataframes named 'train' and 'test
 })
 
 test_that("split_data splits accurately based on the default 0.8 proportion", {
+  set.seed(310)
   dummy_df <- data.frame(id = 1:100, val = runif(100))
   res <- split_data(dummy_df, prop = 0.8)
   
