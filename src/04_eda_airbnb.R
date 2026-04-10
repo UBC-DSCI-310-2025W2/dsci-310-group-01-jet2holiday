@@ -23,8 +23,8 @@ library(tidyr)
 library(docopt)
 library(patchwork)
 
-# Source boxplot function
-source("R/boxplot_function.R")
+# Library the package
+library(airbnbtools)
 
 doc <- "Usage:
   04_eda_airbnb.R --train=<train> --test=<test> --out_dir=<out_dir>

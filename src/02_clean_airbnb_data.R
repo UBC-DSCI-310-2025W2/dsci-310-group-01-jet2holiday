@@ -16,7 +16,8 @@ library(stringr)
 library(tidyr)
 library(docopt)
 
-source("R/clean_airbnb_data.R")
+# Library the package
+library(airbnbtools)
 
 doc <- "Usage:
     02_clean_airbnb_data.R --input=<input> --out=<out>
