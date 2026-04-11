@@ -4,6 +4,10 @@
 # This script downloads Airbnb data from the InsideAirbnb website URL: 
 # "https://data.insideairbnb.com/canada/bc/vancouver/2025-11-17/data/listings.csv.gz"
 #
+# If the script does not function correctly because of the url being invalid/outdated, 
+# please obtain the most version by heading to the website URL:
+# https://insideairbnb.com/get-the-data/
+#
 # It outputs a raw dataset. 
 #
 # Usage:

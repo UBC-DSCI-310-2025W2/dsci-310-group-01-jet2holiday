@@ -90,6 +90,20 @@ R -e "renv::restore()"
 3. Run the analysis:
 make all 
 
+## How to Run Tests
+
+To run all the tests located in `tests` folder, run the following code from the root directory:
+
+```
+testthat::test_dir("tests/testthat")
+```
+
+If you wanted to run an individual test file, run the following code from the root directory:
+
+```
+testthat::test_file("tests/testthat/your_file_of_interest")
+```
+
 ## Project Structure
 
 - `src/airbnb_price_analysis.ipynb`: original analysis notebook
