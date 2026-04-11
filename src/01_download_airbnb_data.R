@@ -8,6 +8,9 @@
 # please obtain the most version by heading to the website URL:
 # https://insideairbnb.com/get-the-data/
 #
+# If the website URL is also invalid, please use the copy of the raw data located in
+# data/raw for future analysis steps.
+#
 # It outputs a raw dataset. 
 #
 # Usage:
