@@ -70,8 +70,6 @@ docker-compose up
 docker-compose down
 ```
 
-After using the virtual environment
-
 **Option 2 — Step by step:**
 
 1. Clone the repository:
