@@ -56,6 +56,22 @@ reports/report.html: $(RESULTS_DIR)/boxplots.png $(VIF_TABLE) $(METRICS_FILE) $(
 
 # Clean
 clean:
-	rm -rf data results reports/*.html
+	# remove processed data, keep raw data
+	rm -rf data/processed/*
+
+	# remove all results (figures, tables, model outputs)
+	rm -rf results/*
+
+	# remove rendered reports
+	rm -f reports/*.html
+	rm -f reports/*.pdf
+
+	# remove Quarto cache
+	rm -rf .quarto/
+
+	# remove LaTeX intermediate files
+	find . -name "*.aux" -delete
+	find . -name "*.log" -delete
+	find . -name "*.tex" -delete
 
 .PHONY: all clean dirs
