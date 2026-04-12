@@ -12,8 +12,8 @@ library(dplyr)
 library(readr)
 library(docopt)
 
-# Source the abstracted function
-source("R/split_data.R")
+# Library the package
+library(airbnbtools)
 
 doc <- "Usage:
   03_train_test_split.R --input=<input> --train=<train> --test=<test>

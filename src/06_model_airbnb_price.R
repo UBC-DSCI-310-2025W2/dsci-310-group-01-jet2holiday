@@ -15,8 +15,8 @@ library(dplyr)
 library(readr)
 library(docopt)
 
-source("R/model_evaluation_helpers.R")
-
+# Library the package
+library(airbnbtools)
 
 doc <- "Usage:
   06_model_airbnb_price.R --train=<train> --test=<test> --metrics_out=<metrics_out> --model_out=<model_out>
