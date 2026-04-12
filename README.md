@@ -114,6 +114,20 @@ make all
 - `src/references.bib`: bibliography used for Quarto citations
 - `data/raw/listings.csv`: input data
 
+## Scripts Overview
+
+The analysis pipeline is organized into modular scripts:
+
+- `01_download_airbnb_data.R`: Downloads raw Airbnb data from InsideAirbnb  
+- `02_clean_airbnb_data.R`: Cleans and preprocesses the dataset, including handling missing values and formatting key variables  
+- `03_train_test_split.R`: Splits the cleaned data into training and testing sets  
+- `04_eda_airbnb.R`: Performs exploratory data analysis, including visualizations and summary statistics, and applies log transformation  
+- `05_check_multicollinearity.R`: Assesses multicollinearity among predictors using VIF  
+- `06_model_airbnb_price.R`: Trains a multiple linear regression model and computes performance metrics  
+- `07_model_evaluation.R`: Evaluates the model using diagnostic plots such as coefficient and residual plots
+
+These scripts are executed via the `Makefile` to produce the final report.
+
 ## Dependencies
 
 The analysis uses an R environment managed by `renv` (see `renv.lock`), with:
