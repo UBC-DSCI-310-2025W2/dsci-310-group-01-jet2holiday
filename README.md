@@ -56,6 +56,24 @@ quarto preview src/report.qmd
 
 ### Using Docker
 
+**Option 1 - All at once (recommended)**
+
+1. Create the virtual environment:
+
+```
+docker-compose up
+```
+
+2. Stop the virtual environment:
+
+```
+docker-compose down
+```
+
+After using the virtual environment
+
+**Option 2 — Step by step:**
+
 1. Clone the repository:
 ```
 git clone https://github.com/UBC-DSCI-310-2025W2/dsci-310-group-01-jet2holiday.git
