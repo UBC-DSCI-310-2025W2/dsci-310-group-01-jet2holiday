@@ -58,9 +58,19 @@ quarto preview src/report.qmd
 
 **Option 1 - All at once (recommended)**
 
+1. Create the virtual environment:
+
 ```
 docker-compose up
 ```
+
+2. Stop the virtual environment:
+
+```
+docker-compose down
+```
+
+After using the virtual environment
 
 **Option 2 — Step by step:**
 
